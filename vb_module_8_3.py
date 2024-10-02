@@ -30,11 +30,26 @@ class IncorrectVinNumber(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class IncorrectCarNumbers(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
 
+
+def createCar(model: str, vin: int, numbers: str) -> Car:
+    '''
+    Возвращает объект Car, если данные корректны.
+    Иначе - None
+    '''
+    try:
+        car = Car(model, vin, numbers)
+    except (IncorrectVinNumber, IncorrectCarNumbers) as exc:
+        print(exc.message)
+        return None
+    else:
+        print(f'{car.model} успешно создан')
+        return car
 
 
 try:
